@@ -1,0 +1,28 @@
+{
+  "name": "range-slide-mango",
+  "version": "1.0.0",
+  "description": "React app for Mango with range slide picker",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fllopis/range-slide-mango.git"
+  },
+  "keywords": [
+    "mango",
+    "range-picker",
+    "multirange"
+  ],
+  "author": "Fernando Llopis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fllopis/range-slide-mango/issues"
+  },
+  "homepage": "https://github.com/fllopis/range-slide-mango#readme",
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}
