@@ -1,0 +1,12 @@
+/* IMPORT GOOGLE FONT */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;500&display=swap');
+
+/* DEFAULT VALUES */
+.trans-03{ -webkit-transition: all .3s ease-in-out; -moz-transition: all .3s ease-in-out; -o-transition: all .3s ease-in-out; transition: all .3s ease-in-out; }
+.trans-05{ -webkit-transition: all .5s ease-in-out; -moz-transition: all .5s ease-in-out; -o-transition: all .5s ease-in-out; transition: all .5s ease-in-out; }
+.trans-07{ -webkit-transition: all .7s ease-in-out; -moz-transition: all .7s ease-in-out; -o-transition: all .7s ease-in-out; transition: all .7s ease-in-out; }
+.trans-1{ -webkit-transition: all 1s ease-in-out; -moz-transition: all 1s ease-in-out; -o-transition: all 1s ease-in-out; transition: all 1s ease-in-out; }
+
+body{ font-family: 'Open Sans', sans-serif; }
+h2{ margin-bottom: 0; }
+p{ font-size: 14px; }

@@ -1,0 +1,16 @@
+/* IMPORT GOOGLE FONT */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;500&display=swap');
+
+/* DEFAULT VALUES */
+.trans-03{ -webkit-transition: all .3s ease-in-out; -moz-transition: all .3s ease-in-out; -o-transition: all .3s ease-in-out; transition: all .3s ease-in-out; }
+.trans-05{ -webkit-transition: all .5s ease-in-out; -moz-transition: all .5s ease-in-out; -o-transition: all .5s ease-in-out; transition: all .5s ease-in-out; }
+.trans-07{ -webkit-transition: all .7s ease-in-out; -moz-transition: all .7s ease-in-out; -o-transition: all .7s ease-in-out; transition: all .7s ease-in-out; }
+.trans-1{ -webkit-transition: all 1s ease-in-out; -moz-transition: all 1s ease-in-out; -o-transition: all 1s ease-in-out; transition: all 1s ease-in-out; }
+
+body{ font-family: 'Open Sans', sans-serif; }
+.title{ font-family: 'Open Sans', sans-serif; text-align: center; }
+
+.menu__container{ width: 100%; padding: 20px; background: #F5F5F5; box-shadow: 3px 3px 3px #ccc; }
+    .menu__container a{ color: #333; text-decoration: none; margin-right: 40px; }
+        .menu__container a:last-child{ margin-right: 0; }
+        .menu__container a:hover{ color: green; }

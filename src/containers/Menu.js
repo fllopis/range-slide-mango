@@ -1,13 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import '../styles/style-menu.css';
 
 const Menu = () => {
   return (
     <div>
-      <nav style={{width: "960px", padding: "20px", margin: "20px auto", background: "#F5F5F5", boxShadow: "3px 3px 3px #ccc"}}>
-        <Link to="/" style={{padding: "15px 20px"}}>Home</Link>
-        <Link to="/exercise1" style={{padding: "15px 20px" }}>Exercise1</Link>
-        <Link to="/exercise2" style={{padding: "15px 20px"}}>Exercise2</Link>
+
+      {/* TITLE / HEADER */}
+      <h1 className="title">Mango Range Picker</h1>
+      {/* <img src={require("../assets/imgs/logo.jpg")} /> */}
+
+      {/* MAIN MENU NAVIGATION */}
+      <nav className="menu__container">
+        <Link to="/" className="trans-05">Home</Link>
+        <Link to="/exercise1" className="trans-05">Exercise1</Link>
+        <Link to="/exercise2" className="trans-05">Exercise2</Link>
       </nav>
     </div>
   );

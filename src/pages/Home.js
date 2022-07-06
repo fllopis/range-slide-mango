@@ -1,9 +1,12 @@
 import React from "react";
 
 const Home = () => {
+
+  console.clear();
+  
   return (
     <div>
-      <h1> Home </h1>
+      <p>Welcome to home of Range Picker test for Mango.</p>
     </div>
   );
 };
