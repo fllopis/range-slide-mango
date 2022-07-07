@@ -7,8 +7,10 @@ const Menu = () => {
     <div>
 
       {/* TITLE / HEADER */}
-      <h1 className="title">Mango Range Picker</h1>
-      {/* <img src={require("../assets/imgs/logo.jpg")} /> */}
+      <div className="text-center mt-4">
+        <img src={"../assets/imgs/logo.png"} width="250px" />
+        <h1 className="title">Range Picker</h1>
+      </div>
 
       {/* MAIN MENU NAVIGATION */}
       <nav className="menu__container">

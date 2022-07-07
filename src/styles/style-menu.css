@@ -8,9 +8,10 @@
 .trans-1{ -webkit-transition: all 1s ease-in-out; -moz-transition: all 1s ease-in-out; -o-transition: all 1s ease-in-out; transition: all 1s ease-in-out; }
 
 body{ font-family: 'Open Sans', sans-serif; }
-.title{ font-family: 'Open Sans', sans-serif; text-align: center; }
+.title{ font-family: 'Open Sans', sans-serif; text-align: center; margin-bottom: 20px; font-size: 20px; margin-top: 5px; }
 
 .menu__container{ width: 100%; padding: 20px; background: #F5F5F5; box-shadow: 3px 3px 3px #ccc; }
     .menu__container a{ color: #333; text-decoration: none; margin-right: 40px; }
         .menu__container a:last-child{ margin-right: 0; }
         .menu__container a:hover{ color: green; }
+        .menu__container a.menu_active{ color: green; }

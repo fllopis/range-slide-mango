@@ -5,6 +5,7 @@ const fetchMockableUri = (url, method) => {
     
     const [data, setData] = useState([]);
 
+    //Getting data from url with useEffect.
     useEffect( () => {
         fetch(url + method)
         .then((response) => response.json())
