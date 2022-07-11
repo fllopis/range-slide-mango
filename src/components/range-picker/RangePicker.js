@@ -132,12 +132,18 @@ const RangePicker = (props) => {
         if (!canDotMoveToLeft()) 
             return;
 
+        console.log(getValue);
+
         if (getXComponent() > 0) {
             setXComponent()(((e.clientX - contentLeftPosition) * 100) / contentWith);
             changeActualPosition(Math.round(getValue));
         } 
-        else if(getXComponent() <= 0)
+        else if(getXComponent() <= 0){
             changeActualPosition(Math.round(min));
+
+            //Force the left dot to 0%, because is triying to set the dot down 0%.
+            setXLeftComponent(0);
+        }
     };
     
     //Function to move the dot normal to right.
@@ -151,8 +157,12 @@ const RangePicker = (props) => {
             setXComponent()(((e.clientX - contentLeftPosition) * 100) / contentWith);
             changeActualPosition(Math.round(getValue));
         }
-        else if(getXComponent() >= 100)
+        else if(getXComponent() >= 100){
             changeActualPosition(max);
+
+            //Force the right dot to 100%, because is triying to set the dot over 100%.
+            setXRightComponent(100);
+        }
     };
 
     //Check if our dot can move to left, depending if the actual position is less than left dot. (To avoid the crash between two dots)
@@ -198,8 +208,6 @@ const RangePicker = (props) => {
         
         //Extracting the left and right new positions to update the position dots.
         let { left, right } = newPositions;
-
-        console.log(newPositions);
 
         //Depending of the dotType we'll update the same
         switch (dotType) {
@@ -261,6 +269,7 @@ const RangePicker = (props) => {
                         placeholder={min}
                         style={{ left: `${xLeftComponent}%` }}
                         id="input-left"
+                        name="input_left"
                         value={actualPosition.left}
                         onChange={ (e) => setActualPosition({ ...actualPosition, left: parseInt(e.target.value) || 0})}
                         onBlur={ (e) => updateDotsPosition(actualPosition, 'dot-left') }
@@ -303,6 +312,7 @@ const RangePicker = (props) => {
                         placeholder={max}
                         style={{ left: `${xRightComponent}%` }}
                         id="input-right"
+                        name="input_right"
                         value={actualPosition.right}
                         onChange={(e) => setActualPosition({ ...actualPosition, right: parseInt(e.target.value) || 0 })}
                         onBlur={ (e) => updateDotsPosition(actualPosition, 'dot-right') }
