@@ -15,6 +15,7 @@ const Exercise1 = () => {
 
         <h2> Normal range</h2>
         <p>A normal range picker, where you can drag two bullets through the range line. Use the number label to change the value (min or max).</p>
+        <p>If you edit the component with inputs, it will update when you leave the input.</p>
         
         <Range 
           min={rangeData.min} 

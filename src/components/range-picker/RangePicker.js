@@ -199,13 +199,19 @@ const RangePicker = (props) => {
         //Extracting the left and right new positions to update the position dots.
         let { left, right } = newPositions;
 
+        console.log(newPositions);
+
         //Depending of the dotType we'll update the same
         switch (dotType) {
 
             //Left dot update when input change.
             case "dot-left":
-                if (left < min)
+                if (left < min){
                     setActualPosition({ ...actualPosition, left: min });
+
+                    //Force the left min, to the min as possible
+                    left = min;
+                }
                 else if (left >= right){
                     setActualPosition({ ...actualPosition, left: right - 1 });
 
@@ -220,8 +226,12 @@ const RangePicker = (props) => {
             
             //Right dot update
             case "dot-right":
-                if (right >= max)
+                if (right >= max){
                     setActualPosition({ ...actualPosition, right: max });
+
+                    //Force the max right, to the max as possible
+                    right = max;
+                }
                 else if (right <= left){
                     setActualPosition({ ...actualPosition, right: left + 1 });
 
@@ -240,7 +250,7 @@ const RangePicker = (props) => {
         <div className="">
             
             {/* CONTENT OF RANGE PICKER SLIDER */}
-            <div ref={rangeContent} className="d-flex justify-content-center rangePickerSlide_container" onMouseUp={(e) => mouseUp(e)}>
+            <div ref={rangeContent} className="d-flex justify-content-center rangePickerSlide_container" onMouseMove={(e) => mouseIsMoving(e)} onMouseUp={(e) => mouseUp(e)}>
 
                 <div className="rangePicker__Input minInput">
                     <input
@@ -253,7 +263,7 @@ const RangePicker = (props) => {
                         id="input-left"
                         value={actualPosition.left}
                         onChange={ (e) => setActualPosition({ ...actualPosition, left: parseInt(e.target.value) || 0})}
-                        onKeyUp={ (e) => updateDotsPosition(actualPosition, 'dot-left') }
+                        onBlur={ (e) => updateDotsPosition(actualPosition, 'dot-left') }
                         onMouseDown={(e) => mouseDown(e, dotSelectedLeft.current)}
                         autoComplete="off"
                     />
@@ -267,6 +277,7 @@ const RangePicker = (props) => {
                     id="dot-left"
                     min-value={extremesDotsValues.left.min}
                     max-value={extremesDotsValues.left.max}
+                    actual-value={actualPosition.left}
                 ></div>
 
                 {/* line of range picker */}
@@ -280,6 +291,7 @@ const RangePicker = (props) => {
                     style={{ left: `${xRightComponent}%` }}
                     min-value={extremesDotsValues.right.min}
                     max-value={extremesDotsValues.right.max}
+                    actual-value={actualPosition.right}
                 ></div>
 
                 <div className="rangePicker__Input maxInput">
@@ -293,7 +305,7 @@ const RangePicker = (props) => {
                         id="input-right"
                         value={actualPosition.right}
                         onChange={(e) => setActualPosition({ ...actualPosition, right: parseInt(e.target.value) || 0 })}
-                        onKeyUp={ (e) => updateDotsPosition(actualPosition, 'dot-right') }
+                        onBlur={ (e) => updateDotsPosition(actualPosition, 'dot-right') }
                         onMouseDown={(e) => mouseDown(e, dotSelectedRight.current)}
                         autoComplete="off"
                     />
