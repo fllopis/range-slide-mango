@@ -11,7 +11,6 @@ const Exercise2 = () => {
   return (
     <div className="mt-4">
       <h2>Fixed range picker</h2>
-      <p>asd</p>
 
     </div>
   );

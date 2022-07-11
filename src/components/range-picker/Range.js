@@ -10,7 +10,7 @@ const Range = (props) => {
     return (
         <section>
           <div className="row mt-5">
-            <div className="col-6 offset-3">
+            <div className="col-4 offset-4">
               <RangePicker
                 min={min}
                 max={max}
