@@ -21,7 +21,7 @@ Clone the repository in a folder and then use the followins commands
 
 ## How to run testing.
 
-To run the app testing just use the followin command.
+To run the app testing just use the followin command. This command will test the app, that run the pages and components, creating a snapshoot of the different results.
 
 ```
  - npm test
