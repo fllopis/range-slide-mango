@@ -11,14 +11,6 @@ const RangePicker = (props) => {
     //Vars from props to configure the input
     const {min, max, isFixedRange, rangeArray} = props;
 
-    /*console.log('================');
-    console.log(props);
-    console.log(min);
-    console.log(max);
-    console.log(isFixedRange);
-    console.log(rangeArray);
-    console.log('================');*/
-
     //Default vars/const
     const [dotComponent, setDotComponent]                               = useState("dot-right");
     const [oldXMousePositionWhenMove, setOldXMousePositionWhenMove]     = useState(0);
@@ -157,8 +149,6 @@ const RangePicker = (props) => {
         //If can't move to left, return false
         if (!canDotMoveToLeft()) 
             return;
-
-        console.log("getValue:", getValue);
 
         if (getXComponent() > 0) {
             setXComponent()(((e.clientX - contentLeftPosition) * 100) / contentWith);
