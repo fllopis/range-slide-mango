@@ -9,6 +9,6 @@ This repository contains a react project test with different react slide pickers
 Clone the repository in a folder and then use the followins commands
 
 ```
-> npm install
-> npm start
+ - npm install
+ - npm start
 ```
