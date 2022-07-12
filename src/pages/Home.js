@@ -12,8 +12,14 @@ const Home = () => {
         <li>Don't use any CLI to create structure and architecture of the application.</li>
         <li>This component has two use modes:</li>
       </ul>
-      <div className="text-center">
+      <div className="row">
+        <div className="col-6">
+          <p><strong>Exercise1:</strong> A normal picker with min and max values from Mockable API.</p>
+          <p><strong>Exercise2:</strong> A range picker with some fixed values that provide from an array from Mockable API</p>
+        </div>
+        <div className="col-6 text-center">
         <img src={"../assets/imgs/example-ranges.png"} />
+        </div>
       </div>
       <p></p>
     </div>
