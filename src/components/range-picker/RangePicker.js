@@ -316,6 +316,24 @@ const RangePicker = (props) => {
                 setActualPosition({ ...actualPosition, right: max });
                 setXRightComponent(((max - min) * 100) / (max - min));
             }
+
+            //Checking if min and max is cross
+            if(actualPosition.left > actualPosition.right && dotComponent.id == 'dot-left'){
+
+                let positionUpdated = actualPosition.right - 1;
+                
+                //Updating position and dot position
+                setActualPosition({ ...actualPosition, left: positionUpdated });
+                setXLeftComponent(((positionUpdated - min) * 100) / (max - min));
+            }
+            else if(actualPosition.right < actualPosition.left && dotComponent.id == 'dot-right'){
+
+                let positionUpdated = actualPosition.left + 1;
+                
+                //Updating position and dot position
+                setActualPosition({ ...actualPosition, right: positionUpdated });
+                setXRightComponent(((positionUpdated - min) * 100) / (max - min));
+            }
         }
 
         setMoveAllowed(false);
