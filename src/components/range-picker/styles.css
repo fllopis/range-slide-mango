@@ -14,7 +14,7 @@
     .rangePicker__container{ position: relative; margin: 0 auto; }
     .rangePickerSlide_container{ position: relative; width: 100%; margin-top: 9px; }
         .rangePicker__line{ height: 8px; width: 100%; background: #aaa; border-radius: 10px; }
-        .rangePicker__dot{ position: absolute; top: inherit; cursor: grab; cursor: -moz-grab; cursor: -webkit-grab; margin-top: -4px; background: #666; width: 15px; height: 15px; border-radius: 50%; z-index: 10; -webkit-transition: all .3s ease-in-out; -moz-transition: all .3s ease-in-out; -o-transition: all .3s ease-in-out; transition: all .3s ease-in-out;  }
+        .rangePicker__dot{ position: absolute; top: inherit; cursor: grab; cursor: -moz-grab; cursor: -webkit-grab; margin-top: -4px; background: #666; width: 15px; height: 15px; border-radius: 50%; z-index: 10;  }
             .dot__left{ left: 0; }
             .dot__right{ right: 0;  }
             .rangePicker__dot:hover{ transform: scale(1.1); transition: transform 0.2s ease-in-out; background: #333; }
