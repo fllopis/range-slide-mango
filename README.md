@@ -18,3 +18,11 @@ Clone the repository in a folder and then use the followins commands
  - npm install
  - npm start
 ```
+
+## How to run testing.
+
+To run the app testing just use the followin command.
+
+```
+ - npm test
+```
