@@ -5,7 +5,7 @@ import './styles.css';
 const Range = (props) => {
 
   //Getting vars from props to configure our range picker.
-  const {min, max, rangeArrayValues} = props;
+  const {min, max, isFixedRange, rangeArray} = props;
 
     return (
         <section>
@@ -14,8 +14,8 @@ const Range = (props) => {
               <RangePicker
                 min={min}
                 max={max}
-                maxSize="450px"
-                readOnly={(rangeArrayValues.length > 0) ? true : false}
+                isFixedRange={isFixedRange}
+                rangeArray={rangeArray}
               />
             </div>
           </div>
@@ -26,7 +26,8 @@ const Range = (props) => {
 Range.defaultProps = {
   min: undefined,
   max: undefined,
-  rangeArrayValues: [],
+  rangeArray: [],
+  isFixedRange: false,
 };
 
 export default Range;

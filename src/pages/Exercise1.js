@@ -1,7 +1,7 @@
 import React from "react";
 import '../styles/style-main.css';
 import fetchMockableUri from "../hooks/mockableHook";
-import { mockableUrl, methodExercise1, methodExercise2 } from '../core/config';
+import { mockableUrl, methodExercise1 } from '../core/config';
 import Range from "../components/range-picker/Range";
 
 const Exercise1 = () => {
@@ -20,6 +20,7 @@ const Exercise1 = () => {
         <Range 
           min={rangeData.min} 
           max={rangeData.max}
+          isFixedRange={false}
         />
 
       </div>

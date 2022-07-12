@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import '../styles/style-main.css';
 import fetchMockableUri from "../hooks/mockableHook";
-import { mockableUrl, methodExercise1, methodExercise2 } from '../core/config';
+import { mockableUrl, methodExercise2 } from '../core/config';
+import Range from "../components/range-picker/Range";
 
 const Exercise2 = () => {
 
@@ -9,27 +10,37 @@ const Exercise2 = () => {
   const rangeArrayData  = fetchMockableUri(mockableUrl, methodExercise2);
 
   //Default values
-  let min = 0;
-  let max = 0;
+  const [params, setParams] = useState({
+    min: 0,
+    max: 0,
+    rangeArray: [],
+    isFixedRange: true
+  });
 
   useEffect(() => {
 
-    console.log(rangeArrayData);
+    //Waiting to load the min, max and array of values.
+    if( typeof rangeArrayData.rangeValues !== 'undefined'){
 
-    if(rangeArrayData.length > 0){
+      //Finding the min and max value of array.
+      let min = Math.min(...rangeArrayData.rangeValues);
+      let max = Math.max(...rangeArrayData.rangeValues);
 
-      /*console.log('listo');
-
-      rangeArrayData.rangeValues.forEach( (data) => {
-        console.log(data);
-      });*/
+      setParams({ ...params, min: min, max: max, rangeArray: rangeArrayData.rangeValues });
     }
   }, [rangeArrayData]);
 
   return (
     <div className="mt-4">
       <h2>Fixed range picker</h2>
-
+      <p>A fixed range picker, is mount through an array of values. You can drag any dot and this will put in the correct position.</p>
+      <p>You can't edit the input values for this example.</p>
+      <Range 
+          min={params.min} 
+          max={params.max}
+          rangeArray={params.rangeArray}
+          isFixedRange={params.isFixedRange}
+        />
     </div>
   );
 };

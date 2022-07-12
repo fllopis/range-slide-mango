@@ -9,17 +9,30 @@ const RangePicker = (props) => {
     const rangeContent      = useRef(null);
 
     //Vars from props to configure the input
-    const {min, max, maxSize, readOnly} = props;
+    const {min, max, isFixedRange, rangeArray} = props;
+
+    /*console.log('================');
+    console.log(props);
+    console.log(min);
+    console.log(max);
+    console.log(isFixedRange);
+    console.log(rangeArray);
+    console.log('================');*/
 
     //Default vars/const
     const [dotComponent, setDotComponent]                               = useState("dot-right");
     const [oldXMousePositionWhenMove, setOldXMousePositionWhenMove]     = useState(0);
     const [moveAllowed, setMoveAllowed]                                 = useState(false);
     let horizontalDirection                                             = "";
+    const [rangeDataPositions, setRangeDataPositions]                   = useState(rangeArray);
 
     //Define the limits of left and right dot.
     const [xLeftComponent, setXLeftComponent]   = useState(0);
     const [xRightComponent, setXRightComponent] = useState(100);
+
+    //Define the limits of left and right dots fot fixed positions.
+    const [xLeftFixedComponent, setXLeftFixedComponent]     = useState(0);
+    const [xRightFixedComponent, setXRightFixedComponent]   = useState(rangeArray?.length - 1);
 
     //Stablashing the extrems of each dot.
     const [extremesDotsValues, setExtremesDotsValues] = useState({
@@ -46,8 +59,14 @@ const RangePicker = (props) => {
             right: { min: min, max: max },
         });
         setActualPosition({ ...actualPosition, left: min, right: max });
-        //fixedType && setPositionArray(priceArray);
-    }, [min, max]);
+
+        //Updating the array possible positions for range.
+        if(isFixedRange){
+            setRangeDataPositions(rangeArray);
+            setXRightFixedComponent(rangeArray?.length - 1);
+        }
+
+    }, [min, max, rangeArray]);
 
     //Function to detect when the cursor is down on any dot.
     let mouseDown = (e, dotSelector) => {
@@ -57,16 +76,22 @@ const RangePicker = (props) => {
 
     //Function to return the set component to edit.
     let setXComponent = () => {
-        return dotComponent?.id === "dot-right"
-          ? setXRightComponent
-          : setXLeftComponent;
+        return (dotComponent?.id === "dot-right") ? setXRightComponent : setXLeftComponent;
     };
 
     //Function to get the x component, to know which dot are moving.
     let getXComponent = () => {
-        return dotComponent?.id === "dot-right"
-          ? xRightComponent
-          : xLeftComponent;
+        return (dotComponent?.id === "dot-right") ? xRightComponent : xLeftComponent;
+    };
+
+    //Function to return the set x component fixed to edit.
+    let setXFixedComponent = () => {
+        return (dotComponent?.id === "dot-right") ? setXRightFixedComponent : setXLeftFixedComponent;
+    };
+    
+    //Function to get the x component fixed
+    let getXFixedComponent = () => {
+        return (dotComponent?.id === "dot-right") ? xRightFixedComponent : xLeftFixedComponent;
     };
 
     //Function to change the position of dot.
@@ -97,10 +122,8 @@ const RangePicker = (props) => {
                 case "left":
 
                     //We need to know if is a normal range or fixed range with some values.
-                    if(readOnly){
-                        //moveToLeftFixed(e, contentWith, contentLeftPosition, getValue);
-                        console.log('Necesitamos movernos de forma fija a determinados valores.');
-                    }
+                    if(isFixedRange)
+                        moveToLeft__fixed(e, contentWith, contentLeftPosition, getValue);
                     else
                         moveToLeft(e, contentWith, contentLeftPosition, getValue);
 
@@ -110,10 +133,8 @@ const RangePicker = (props) => {
                 case "right":
 
                     //We need to know if is a normal range or fixed range with some values.
-                    if(readOnly){
-                        //moveToRightFixed(e, contentWith, contentLeftPosition, getValue);
-                        console.log('Necesitamos movernos de forma fija a determinados valores.');
-                    }
+                    if(isFixedRange)
+                        moveToRight__fixed(e, contentWith, contentLeftPosition, getValue);
                     else
                         moveToRight(e, contentWith, contentLeftPosition, getValue);
                     
@@ -125,6 +146,11 @@ const RangePicker = (props) => {
         }
     };
 
+    /********************************
+     *                              *
+     *      NORMAL MOVEMENT RANGE   *
+     *                              *
+     ********************************/
     //Function to move the dot normal to left.
     let moveToLeft = (e, contentWith, contentLeftPosition, getValue) => {
         
@@ -132,7 +158,7 @@ const RangePicker = (props) => {
         if (!canDotMoveToLeft()) 
             return;
 
-        console.log(getValue);
+        console.log("getValue:", getValue);
 
         if (getXComponent() > 0) {
             setXComponent()(((e.clientX - contentLeftPosition) * 100) / contentWith);
@@ -162,6 +188,58 @@ const RangePicker = (props) => {
 
             //Force the right dot to 100%, because is triying to set the dot over 100%.
             setXRightComponent(100);
+        }
+    };
+
+    /********************************
+     *                              *
+     *      FIXED MOVEMENT RANGE    *
+     *                              *
+     ********************************/
+    
+    //Function to move the dot with fixed array to left.
+    let moveToLeft__fixed = (e, contentWith, contentLeftPosition, getValue) => {
+        
+         //If can't move to left, return false
+        if (!canDotMoveToLeft())
+            return;
+    
+        let newFixedPosition = getXFixedComponent() - 1;
+
+        //Checking if the new position is below 0.
+        if(newFixedPosition + 1 === 0)
+            return false;
+
+        //Getting the new value from array of positions
+        let newValue = rangeDataPositions[newFixedPosition];
+
+        //Setting the new value and positions
+        if (getXComponent() > 0 && getValue >= Math.round(newValue))
+            setXComponent()(((e.clientX - contentLeftPosition) * 100) / contentWith);
+        else{
+          changeActualPosition(rangeDataPositions[newFixedPosition]);
+          setXFixedComponent()(newFixedPosition);
+        }
+    };
+
+    //Function to move the dot with fixed array to right
+    let moveToRight__fixed = (e, contentWith, contentLeftPosition, getValue) => {
+        if (!canDotMoveToRight()) return;
+        let newFixedPosition = getXFixedComponent() + 1;
+
+        //Checking if the new position is more than the lengh of array to don't do nothing.
+        if(newFixedPosition === rangeArray.length)
+            return false;
+
+        //Getting the new value from array of positions
+        let newValue = rangeDataPositions[newFixedPosition];
+
+        //Setting the new value and positions
+        if (getXComponent() < 100 && getValue <= Math.round(newValue))
+            setXComponent()(((e.clientX - contentLeftPosition) * 100) / contentWith);
+        else{
+          changeActualPosition(rangeDataPositions[newFixedPosition]);
+          setXFixedComponent()(newFixedPosition);
         }
     };
 
@@ -197,9 +275,59 @@ const RangePicker = (props) => {
 
     //Detecting when mouse up of dot.
     let mouseUp = (e) => {
-        //let newPosition = getArrayState();
-        //fixedType && changeActualPosition(positionsArray[newPosition]);
-        //fixedType && setArrayState()(newPosition);
+        
+        //Manage when mouseUp for fixed range
+        if(isFixedRange){
+
+            //When mouseUp, take the position for fixed range
+            let newFixedPosition = getXFixedComponent();
+
+            //Update the position of position and component.
+            changeActualPosition(rangeDataPositions[newFixedPosition]);
+            setXFixedComponent()(newFixedPosition);
+
+            //Detecting wich dot is moving to update his value to "newFixedPosition"
+            if(dotComponent.id == 'dot-right'){
+
+                let dotRightPosition = rangeDataPositions[newFixedPosition];
+
+                //Checking if the "value == max" because we need to put the right dot to 100%.
+                if(rangeDataPositions[newFixedPosition] == max)
+                    dotRightPosition = 100;
+
+                setXRightComponent(dotRightPosition);
+            }
+            else{
+
+                let dotLeftPosition = rangeDataPositions[newFixedPosition];
+
+                //Checking if the "value == min" because we need to put the right dot to 0%.
+                if(rangeDataPositions[newFixedPosition] == min)
+                    dotLeftPosition = 0;
+
+                setXLeftComponent(dotLeftPosition);
+            }
+        }
+        //Checking if values is lower or higher than min and max to restore to min and max possible.
+        else{
+
+            //Manage the min dot position
+            if(actualPosition.left < min){
+
+                //Updating position and dot position
+                setActualPosition({ ...actualPosition, left: min });
+                setXLeftComponent(((min - min) * 100) / (max - min));
+            }
+            
+            //Manage the max dot position
+            if(actualPosition.right > max){
+                
+                //Updating position and dot position
+                setActualPosition({ ...actualPosition, right: max });
+                setXRightComponent(((max - min) * 100) / (max - min));
+            }
+        }
+
         setMoveAllowed(false);
     };
 
@@ -261,21 +389,26 @@ const RangePicker = (props) => {
             <div ref={rangeContent} className="d-flex justify-content-center rangePickerSlide_container" onMouseMove={(e) => mouseIsMoving(e)} onMouseUp={(e) => mouseUp(e)}>
 
                 <div className="rangePicker__Input minInput">
-                    <input
-                        type="number"
-                        min={min}
-                        max={max}
-                        readOnly={readOnly}
-                        placeholder={min}
-                        style={{ left: `${xLeftComponent}%` }}
-                        id="input-left"
-                        name="input_left"
-                        value={actualPosition.left}
-                        onChange={ (e) => setActualPosition({ ...actualPosition, left: parseInt(e.target.value) || 0})}
-                        onBlur={ (e) => updateDotsPosition(actualPosition, 'dot-left') }
-                        onMouseDown={(e) => mouseDown(e, dotSelectedLeft.current)}
-                        autoComplete="off"
-                    />
+                    { 
+                        isFixedRange ? (
+                            <span className='actualPositionTxt'>{actualPosition.left}</span>
+                        ) : (
+                            <input
+                                type="number"
+                                min={min}
+                                max={max}
+                                placeholder={min}
+                                style={{ left: `${xLeftComponent}%` }}
+                                id="input-left"
+                                name="input_left"
+                                value={actualPosition.left}
+                                onChange={ (e) => setActualPosition({ ...actualPosition, left: parseInt(e.target.value) || 0})}
+                                onBlur={ (e) => updateDotsPosition(actualPosition, 'dot-left') }
+                                onMouseDown={(e) => mouseDown(e, dotSelectedLeft.current)}
+                                autoComplete="off"
+                            />
+                        )
+                    }
                 </div>
 
                 {/* first dot */}
@@ -304,21 +437,27 @@ const RangePicker = (props) => {
                 ></div>
 
                 <div className="rangePicker__Input maxInput">
-                    <input
-                        type="number"
-                        min={min}
-                        max={max}
-                        readOnly={readOnly}
-                        placeholder={max}
-                        style={{ left: `${xRightComponent}%` }}
-                        id="input-right"
-                        name="input_right"
-                        value={actualPosition.right}
-                        onChange={(e) => setActualPosition({ ...actualPosition, right: parseInt(e.target.value) || 0 })}
-                        onBlur={ (e) => updateDotsPosition(actualPosition, 'dot-right') }
-                        onMouseDown={(e) => mouseDown(e, dotSelectedRight.current)}
-                        autoComplete="off"
-                    />
+                    { 
+                        //Checking if is edditable
+                        isFixedRange ? (
+                            <span className='actualPositionTxt'>{actualPosition.right}</span>
+                        ) : (
+                            <input
+                                type="number"
+                                min={min}
+                                max={max}
+                                placeholder={max}
+                                style={{ left: `${xRightComponent}%` }}
+                                id="input-right"
+                                name="input_right"
+                                value={actualPosition.right}
+                                onChange={(e) => setActualPosition({ ...actualPosition, right: parseInt(e.target.value) || 0 })}
+                                onBlur={ (e) => updateDotsPosition(actualPosition, 'dot-right') }
+                                onMouseDown={(e) => mouseDown(e, dotSelectedRight.current)}
+                                autoComplete="off"
+                            />
+                        )
+                    }
                 </div>
             </div>
         </div>
