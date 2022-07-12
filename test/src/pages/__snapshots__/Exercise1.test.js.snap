@@ -1,0 +1,212 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing page Exercise1 Should load the page Exercise1 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+       
+      <div
+        class="row"
+      >
+        <div
+          class="col mt-4"
+        >
+          <h2>
+             Normal range
+          </h2>
+          <p>
+            A normal range picker, where you can drag two bullets through the range line. Use the number label to change the value (min or max).
+          </p>
+          <p>
+            If you edit the component with inputs, it will update when you leave the input.
+          </p>
+          <section>
+            <div
+              class="row mt-5"
+            >
+              <div
+                class="col-4 offset-4"
+              >
+                <div
+                  class=""
+                >
+                  <div
+                    class="d-flex justify-content-center rangePickerSlide_container"
+                  >
+                    <div
+                      class="rangePicker__Input minInput"
+                    >
+                      <input
+                        autocomplete="off"
+                        id="input-left"
+                        name="input_left"
+                        style="left: 0%;"
+                        type="number"
+                        value=""
+                      />
+                    </div>
+                    <div
+                      class="rangePicker__dot dot__left"
+                      id="dot-left"
+                      style="left: 0%;"
+                    />
+                    <div
+                      class="rangePicker__line"
+                    />
+                    <div
+                      class="rangePicker__dot dot__right"
+                      id="dot-right"
+                      style="left: 100%;"
+                    />
+                    <div
+                      class="rangePicker__Input maxInput"
+                    >
+                      <input
+                        autocomplete="off"
+                        id="input-right"
+                        name="input_right"
+                        style="left: 100%;"
+                        type="number"
+                        value=""
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+       
+    </div>
+  </body>,
+  "container": <div>
+     
+    <div
+      class="row"
+    >
+      <div
+        class="col mt-4"
+      >
+        <h2>
+           Normal range
+        </h2>
+        <p>
+          A normal range picker, where you can drag two bullets through the range line. Use the number label to change the value (min or max).
+        </p>
+        <p>
+          If you edit the component with inputs, it will update when you leave the input.
+        </p>
+        <section>
+          <div
+            class="row mt-5"
+          >
+            <div
+              class="col-4 offset-4"
+            >
+              <div
+                class=""
+              >
+                <div
+                  class="d-flex justify-content-center rangePickerSlide_container"
+                >
+                  <div
+                    class="rangePicker__Input minInput"
+                  >
+                    <input
+                      autocomplete="off"
+                      id="input-left"
+                      name="input_left"
+                      style="left: 0%;"
+                      type="number"
+                      value=""
+                    />
+                  </div>
+                  <div
+                    class="rangePicker__dot dot__left"
+                    id="dot-left"
+                    style="left: 0%;"
+                  />
+                  <div
+                    class="rangePicker__line"
+                  />
+                  <div
+                    class="rangePicker__dot dot__right"
+                    id="dot-right"
+                    style="left: 100%;"
+                  />
+                  <div
+                    class="rangePicker__Input maxInput"
+                  >
+                    <input
+                      autocomplete="off"
+                      id="input-right"
+                      name="input_right"
+                      style="left: 100%;"
+                      type="number"
+                      value=""
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+     
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
