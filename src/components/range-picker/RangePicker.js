@@ -15,7 +15,7 @@ const RangePicker = (props) => {
     const [dotComponent, setDotComponent]                               = useState("dot-right");
     const [oldXMousePositionWhenMove, setOldXMousePositionWhenMove]     = useState(0);
     const [moveAllowed, setMoveAllowed]                                 = useState(false);
-    let horizontalDirection                                             = "";
+    let horizontalDirection                                             = useRef("");
     const [rangeDataPositions, setRangeDataPositions]                   = useState(rangeArray);
 
     //Define the limits of left and right dot.
@@ -190,7 +190,7 @@ const RangePicker = (props) => {
     //Function to move the dot with fixed array to left.
     const moveToLeft__fixed = (e, contentWith, contentLeftPosition, getValue) => {
         
-         //If can't move to left, return false
+         //If can't move to left, return
         if (!canDotMoveToLeft())
             return;
     
@@ -198,7 +198,7 @@ const RangePicker = (props) => {
 
         //Checking if the new position is below 0.
         if(newFixedPosition + 1 === 0)
-            return false;
+            return;
 
         //Getting the new value from array of positions
         let newValue = rangeDataPositions[newFixedPosition];
@@ -219,7 +219,7 @@ const RangePicker = (props) => {
 
         //Checking if the new position is more than the lengh of array to don't do nothing.
         if(newFixedPosition === rangeArray.length)
-            return false;
+            return;
 
         //Getting the new value from array of positions
         let newValue = rangeDataPositions[newFixedPosition];

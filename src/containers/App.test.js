@@ -1,17 +1,17 @@
 import React from 'react'
-import Exercise1 from '../../../src/pages/Exercise1'
+import App from './App'
 import { render } from '@testing-library/react';
 import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 
-describe('Testing page Exercise1', () => {
+describe('Testing loading App', () => {
     
     const history = createMemoryHistory();
     
-    test('Should load the page Exercise1', () => {
+    test('Should load App content that loads /page/Home', () => {
         
         const wrapper = render(
-            <Router location={history.location} navigator={history}> <Exercise1 /> </Router>);
+            <Router location={history.location} navigator={history}> <App /> </Router>);
             expect(wrapper).toMatchSnapshot();
         }
     );

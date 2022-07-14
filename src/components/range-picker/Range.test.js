@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import Range from '../../../../src/components/range-picker/Range';
+import Range from './Range';
 import { render } from '@testing-library/react';
 import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
