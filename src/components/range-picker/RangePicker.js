@@ -15,16 +15,16 @@ const RangePicker = (props) => {
     const [dotComponent, setDotComponent]                               = useState("dot-right");
     const [oldXMousePositionWhenMove, setOldXMousePositionWhenMove]     = useState(0);
     const [moveAllowed, setMoveAllowed]                                 = useState(false);
-    let horizontalDirection                                             = useRef("");
     const [rangeDataPositions, setRangeDataPositions]                   = useState(rangeArray);
+    let horizontalDirection                                             = useRef("");
 
     //Define the limits of left and right dot.
-    const [xLeftComponent, setXLeftComponent]   = useState(0);
-    const [xRightComponent, setXRightComponent] = useState(100);
+    const [xLeftComponent, setXLeftComponent]                           = useState(0);
+    const [xRightComponent, setXRightComponent]                         = useState(100);
 
     //Define the limits of left and right dots fot fixed positions.
-    const [xLeftFixedComponent, setXLeftFixedComponent]     = useState(0);
-    const [xRightFixedComponent, setXRightFixedComponent]   = useState(rangeArray?.length - 1);
+    const [xLeftFixedComponent, setXLeftFixedComponent]                 = useState(0);
+    const [xRightFixedComponent, setXRightFixedComponent]               = useState(rangeArray?.length - 1);
 
     //Stablashing the extrems of each dot.
     const [extremesDotsValues, setExtremesDotsValues] = useState({
@@ -44,7 +44,10 @@ const RangePicker = (props) => {
         right: max,
     });
 
-    //Autcomplete the min/max values, waiting of his recievement.
+    /**
+     * Autcomplete the min/max values and rangeArray, waiting of his recievement.
+     * @returns nothing
+    */
     useEffect(() => {
         setExtremesDotsValues({
             left: { min: min, max: max },
@@ -60,33 +63,54 @@ const RangePicker = (props) => {
 
     }, [min, max, rangeArray]);
 
-    //Function to detect when the cursor is down on any dot.
+    /**
+     * Function to detect when the cursor is down on any dot.
+     * @param {event} e - The event when mouseDown
+     * @param {element} dotSelector - Element of the current dot selected or clicked.
+     * @returns nothing
+    */
     const mouseDown = (e, dotSelector) => {
         setDotComponent(dotSelector);
         setMoveAllowed(true);
     };
 
-    //Function to return the set component to edit.
+    /**
+     * Function to return the set component to edit.
+     * @returns {function} - The setXComponent to edit.
+    */
     const setXComponent = () => {
         return (dotComponent?.id === "dot-right") ? setXRightComponent : setXLeftComponent;
     };
 
-    //Function to get the x component, to know which dot are moving.
+    /**
+     * Function to get the x component, to know which dot are moving.
+     * @returns {number}
+    */
     const getXComponent = () => {
         return (dotComponent?.id === "dot-right") ? xRightComponent : xLeftComponent;
     };
 
-    //Function to return the set x component fixed to edit.
+    /**
+     * Function to return the set x component fixed to edit.
+     * @returns {function} - The setXFixedComponent to edit.
+    */
     const setXFixedComponent = () => {
         return (dotComponent?.id === "dot-right") ? setXRightFixedComponent : setXLeftFixedComponent;
     };
     
-    //Function to get the x component fixed
+    /**
+     * Function to get the x component fixed
+     * @returns {number}
+    */
     const getXFixedComponent = () => {
         return (dotComponent?.id === "dot-right") ? xRightFixedComponent : xLeftFixedComponent;
     };
 
-    //Function to change the position of dot.
+    /**
+     * Function to change the position of dot.
+     * @param {number} value - Number of the new position to change.
+     * @returns nothing
+    */
     const changeActualPosition = (value) => {
         if(dotComponent.id === "dot-right")
             setActualPosition({ ...actualPosition, right: value });
@@ -94,7 +118,11 @@ const RangePicker = (props) => {
             setActualPosition({ ...actualPosition, left: value });
     };
 
-    //Function that move the dot to right or left in base to his actual position and percentage.
+    /**
+     * Function that move the dot to right or left in base to his actual position and percentage.
+     * @param {event} e - Event when mouseIsMoving the dot.
+     * @returns nothing
+    */
     const moveAndCalculateDotPosition = (e) => {
 
         //Obtaining the with of our content bar and position
@@ -143,7 +171,15 @@ const RangePicker = (props) => {
      *      NORMAL MOVEMENT RANGE   *
      *                              *
      ********************************/
-    //Function to move the dot normal to left.
+    
+    /**
+     * Function to move the dot normal to left.
+     * @param {event} e                     - Event when mouseIsMoving the dot.
+     * @param {number} contentWith          - Number of width content where range is inside
+     * @param {number} contentLeftPosition  - Number of pixels to the left of the current element relative to parent.
+     * @param {number} getValue             - Value of the dot position (where to move).
+     * @returns could return false if the dot can't move to left.
+    */
     const moveToLeft = (e, contentWith, contentLeftPosition, getValue) => {
         
         //If can't move to left, return false
@@ -162,7 +198,14 @@ const RangePicker = (props) => {
         }
     };
     
-    //Function to move the dot normal to right.
+    /**
+     * Function to move the dot normal to right.
+     * @param {event} e                     - Event when mouseIsMoving the dot.
+     * @param {number} contentWith          - Number of width content where range is inside
+     * @param {number} contentLeftPosition  - Number of pixels to the left of the current element relative to parent.
+     * @param {number} getValue             - Value of the dot position (where to move).
+     * @returns could return false if the dot can't move to right.
+    */
     const moveToRight = (e, contentWith, contentLeftPosition, getValue) => {
         
         //If can't move to right, return false
@@ -187,7 +230,14 @@ const RangePicker = (props) => {
      *                              *
      ********************************/
     
-    //Function to move the dot with fixed array to left.
+    /**
+     * Function to move the dot with fixed array to left.
+     * @param {event} e                     - Event when mouseIsMoving the dot.
+     * @param {number} contentWith          - Number of width content where range is inside
+     * @param {number} contentLeftPosition  - Number of pixels to the left of the current element relative to parent.
+     * @param {number} getValue             - Value of the dot position (where to move).
+     * @returns could return false if the dot can't move to left
+    */
     const moveToLeft__fixed = (e, contentWith, contentLeftPosition, getValue) => {
         
          //If can't move to left, return
@@ -212,9 +262,19 @@ const RangePicker = (props) => {
         }
     };
 
-    //Function to move the dot with fixed array to right
+    /**
+     * Function to move the dot with fixed array to right
+     * @param {event} e                     - Event when mouseIsMoving the dot.
+     * @param {number} contentWith          - Number of width content where range is inside
+     * @param {number} contentLeftPosition  - Number of pixels to the left of the current element relative to parent.
+     * @param {number} getValue             - Value of the dot position (where to move).
+     * @returns could return false if the dot can't move to right or if try to move the dot in more positions than our array of values
+    */
     const moveToRight__fixed = (e, contentWith, contentLeftPosition, getValue) => {
-        if (!canDotMoveToRight()) return;
+
+        if(!canDotMoveToRight())
+            return;
+        
         let newFixedPosition = getXFixedComponent() + 1;
 
         //Checking if the new position is more than the lengh of array to don't do nothing.
@@ -233,7 +293,10 @@ const RangePicker = (props) => {
         }
     };
 
-    //Check if our dot can move to left, depending if the actual position is less than left dot. (To avoid the crash between two dots)
+    /**
+     * Functon to check if our dot can move to left, depending if the actual position is less than left dot. (To avoid the crash between two dots)
+     * @returns {true|false}
+    */
     const canDotMoveToLeft = () => {
         if (dotComponent.id === "dot-right"){
             return actualPosition.right > actualPosition.left + 1;
@@ -241,7 +304,10 @@ const RangePicker = (props) => {
         return true;
     };
     
-    //Check if our dot can move to right, depending if the actual position is less than right dot. (To avoid the crash between two dots)
+    /**
+     * Functon to check if our dot can move to right, depending if the actual position is less than right dot. (To avoid the crash between two dots)
+     * @returns {true|false}
+    */
     const canDotMoveToRight = () => {
         if (dotComponent.id === "dot-left"){
             return actualPosition.left < actualPosition.right - 1;
@@ -249,7 +315,11 @@ const RangePicker = (props) => {
         return true;
     };
 
-    //When the mouse is moving then we need to detect where is moving.
+    /**
+     * When the mouse is moving then we need to detect where is moving.
+     * @param {event} e  - Event when mouseIsMoving the dot.
+     * @returns nothing
+    */
     const mouseIsMoving = (e) => {
 
         if(e.pageX < oldXMousePositionWhenMove)
@@ -263,7 +333,11 @@ const RangePicker = (props) => {
         moveAndCalculateDotPosition(e);
     };
 
-    //Detecting when mouse up of dot.
+    /**
+     * Function to use when mouse up of dot.
+     * @param {event} e  - Event when mouseUp the dot.
+     * @returns nothing
+    */
     const mouseUp = (e) => {
         
         //Manage when mouseUp for fixed range
@@ -339,7 +413,12 @@ const RangePicker = (props) => {
         setMoveAllowed(false);
     };
 
-    //Updating the dot position with input value.
+    /**
+     * Function to update the dot position when onBlur of our different inputs.
+     * @param {Array<number>} newPositions  - An array that content the left and right new position of the dot that we'll move.
+     * @param {string} dotType              - String with the id of the dot to move.
+     * @returns nothing
+    */
     const updateDotsPosition = (newPositions, dotType) => {
         
         //Extracting the left and right new positions to update the position dots.
