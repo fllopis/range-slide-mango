@@ -25,6 +25,7 @@
   "homepage": "https://github.com/fllopis/range-slide-mango#readme",
   "dependencies": {
     "bootstrap": "^5.1.3",
+    "jsdoc": "^3.6.10",
     "react": "^18.2.0",
     "react-bootstrap": "^2.4.0",
     "react-dom": "^18.2.0",
