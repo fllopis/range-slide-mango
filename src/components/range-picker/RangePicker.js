@@ -147,7 +147,7 @@ const RangePicker = (props) => {
                     else
                         moveToLeft(e, contentWith, contentLeftPosition, getValue);
 
-                    return;
+                    break;
 
                 //Right mouse movement.
                 case "right":
@@ -158,10 +158,10 @@ const RangePicker = (props) => {
                     else
                         moveToRight(e, contentWith, contentLeftPosition, getValue);
                     
-                    return;
+                    break;
 
                 default:
-                    return;
+                    break;
           }
         }
     };
