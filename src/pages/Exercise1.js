@@ -17,11 +17,16 @@ const Exercise1 = () => {
         <p>A normal range picker, where you can drag two bullets through the range line. Use the number label to change the value (min or max).</p>
         <p>If you edit the component with inputs, it will update when you leave the input.</p>
         
-        <Range 
-          min={rangeData.min} 
-          max={rangeData.max}
-          isFixedRange={false}
-        />
+        
+        <div className="row mt-5">
+          <div className="col-4 offset-4">
+            <Range 
+              min={rangeData.min} 
+              max={rangeData.max}
+              isFixedRange={false}
+            />
+          </div>
+        </div>
 
       </div>
     </div>

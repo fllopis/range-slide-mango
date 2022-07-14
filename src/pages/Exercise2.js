@@ -35,12 +35,18 @@ const Exercise2 = () => {
       <h2>Fixed range picker</h2>
       <p>A fixed range picker, is mount through an array of values. You can drag any dot and this will put in the correct position.</p>
       <p>You can't edit the input values for this example.</p>
-      <Range 
-          min={params.min} 
-          max={params.max}
-          rangeArray={params.rangeArray}
-          isFixedRange={params.isFixedRange}
-        />
+      
+      <div className="row mt-5">
+        <div className="col-4 offset-4">
+          <Range 
+              min={params.min} 
+              max={params.max}
+              rangeArray={params.rangeArray}
+              isFixedRange={params.isFixedRange}
+          />
+        </div>
+      </div>
+      
     </div>
   );
 };

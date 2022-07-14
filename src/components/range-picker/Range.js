@@ -8,18 +8,12 @@ const Range = (props) => {
   const {min, max, isFixedRange, rangeArray} = props;
 
     return (
-        <section>
-          <div className="row mt-5">
-            <div className="col-4 offset-4">
-              <RangePicker
-                min={min}
-                max={max}
-                isFixedRange={isFixedRange}
-                rangeArray={rangeArray}
-              />
-            </div>
-          </div>
-        </section>
+      <RangePicker
+        min={min}
+        max={max}
+        isFixedRange={isFixedRange}
+        rangeArray={rangeArray}
+      />
     );
 }
 
